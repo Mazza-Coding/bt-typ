@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import styles from "./Lesson.module.css";
+// @ts-ignore
 import { Howl, Howler } from "howler";
 
 // Audio cache to prevent creating multiple instances of the same sound
@@ -29,10 +30,9 @@ const Lesson = () => {
   >(null);
   const [navExpanded, setNavExpanded] = useState(false);
 
-  // We don't need these refs anymore since Howler handles the audio elements
-  // audioRef and feedbackAudioRef are kept for compatibility but not used
-
+  // @ts-ignore - These refs are kept for compatibility
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  // @ts-ignore - These refs are kept for compatibility
   const feedbackAudioRef = useRef<HTMLAudioElement | null>(null);
 
   // Word data with pronunciation
@@ -245,9 +245,18 @@ const Lesson = () => {
         src: ["/audio/feedback/correct.mp3"],
         volume: 1.0,
         preload: true,
+        html5: true, // Enable HTML5 Audio to work better on mobile
         onend: () => {
           // Clear playing audio state when sound ends
           setPlayingAudio(null);
+        },
+        // @ts-ignore - id parameter is required by howler but not used
+        onloaderror: (id, error) => {
+          console.error("Error loading audio:", error);
+        },
+        // @ts-ignore - id parameter is required by howler but not used
+        onplayerror: (id, error) => {
+          console.error("Error playing audio:", error);
         },
       });
     }
@@ -257,9 +266,18 @@ const Lesson = () => {
         src: ["/audio/feedback/wrong.mp3"],
         volume: 1.0,
         preload: true,
+        html5: true, // Enable HTML5 Audio to work better on mobile
         onend: () => {
           // Clear playing audio state when sound ends
           setPlayingAudio(null);
+        },
+        // @ts-ignore - id parameter is required by howler but not used
+        onloaderror: (id, error) => {
+          console.error("Error loading audio:", error);
+        },
+        // @ts-ignore - id parameter is required by howler but not used
+        onplayerror: (id, error) => {
+          console.error("Error playing audio:", error);
         },
       });
     }
@@ -285,22 +303,18 @@ const Lesson = () => {
         src: [audioPath],
         volume: 1.0,
         preload: true,
+        html5: true, // Enable HTML5 Audio to work better on mobile
         onend: () => {
           // Clear playing audio state when sound ends
           setPlayingAudio(null);
         },
+        // @ts-ignore - id parameter is required by howler but not used
         onloaderror: (id, error) => {
-          console.error(`Error loading audio ${wordId}:`, error);
-          setPlayingAudio(null);
+          console.error("Error loading audio:", error);
         },
+        // @ts-ignore - id parameter is required by howler but not used
         onplayerror: (id, error) => {
-          console.error(`Error playing audio ${wordId}:`, error);
-          setPlayingAudio(null);
-
-          // Try again after unlock event (helpful for mobile)
-          audioCache[wordId].once("unlock", function () {
-            audioCache[wordId].play();
-          });
+          console.error("Error playing audio:", error);
         },
       });
     }
