@@ -1,6 +1,10 @@
 import { useParams, Link } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import styles from "./Lesson.module.css";
+import { Howl, Howler } from "howler";
+
+// Audio cache to prevent creating multiple instances of the same sound
+const audioCache: { [key: string]: Howl } = {};
 
 const Lesson = () => {
   const { id } = useParams<{ id: string }>();
@@ -24,6 +28,10 @@ const Lesson = () => {
     string | null
   >(null);
   const [navExpanded, setNavExpanded] = useState(false);
+
+  // We don't need these refs anymore since Howler handles the audio elements
+  // audioRef and feedbackAudioRef are kept for compatibility but not used
+
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const feedbackAudioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -230,101 +238,83 @@ const Lesson = () => {
     { id: "D", text: "Kocham morzy", isCorrect: false },
   ];
 
+  // Initialize feedback sounds once
+  useEffect(() => {
+    if (!audioCache["correct"]) {
+      audioCache["correct"] = new Howl({
+        src: ["/audio/feedback/correct.mp3"],
+        volume: 1.0,
+        preload: true,
+        onend: () => {
+          // Clear playing audio state when sound ends
+          setPlayingAudio(null);
+        },
+      });
+    }
+
+    if (!audioCache["wrong"]) {
+      audioCache["wrong"] = new Howl({
+        src: ["/audio/feedback/wrong.mp3"],
+        volume: 1.0,
+        preload: true,
+        onend: () => {
+          // Clear playing audio state when sound ends
+          setPlayingAudio(null);
+        },
+      });
+    }
+
+    // Clean up howler instances on unmount (optional but good practice)
+    return () => {
+      // No need to explicitly unload as Howler handles this
+    };
+  }, []);
+
   const playAudio = (wordId: string, audioPath: string) => {
+    // Stop any currently playing audio
+    if (playingAudio && audioCache[playingAudio]) {
+      audioCache[playingAudio].stop();
+    }
+
     // Set the currently playing audio for the UI
     setPlayingAudio(wordId);
 
-    // If we have an existing audio element, pause it
-    if (audioRef.current) {
-      audioRef.current.pause();
-    }
+    // Create or get the cached Howl instance
+    if (!audioCache[wordId]) {
+      audioCache[wordId] = new Howl({
+        src: [audioPath],
+        volume: 1.0,
+        preload: true,
+        onend: () => {
+          // Clear playing audio state when sound ends
+          setPlayingAudio(null);
+        },
+        onloaderror: (id, error) => {
+          console.error(`Error loading audio ${wordId}:`, error);
+          setPlayingAudio(null);
+        },
+        onplayerror: (id, error) => {
+          console.error(`Error playing audio ${wordId}:`, error);
+          setPlayingAudio(null);
 
-    // Create a new audio element
-    const audio = new Audio(audioPath);
-    audioRef.current = audio;
-
-    // For mobile compatibility: set attributes before playing
-    audio.setAttribute("playsinline", "true");
-    audio.volume = 1.0;
-
-    // Play the audio and update state when finished
-    const playPromise = audio.play();
-
-    if (playPromise !== undefined) {
-      playPromise.catch((error) => {
-        console.error("Error playing audio:", error);
-        // Try to resume audio context if suspended (common on iOS)
-        if (typeof window !== "undefined" && window.AudioContext) {
-          try {
-            const audioContext = new (window.AudioContext ||
-              (window as any).webkitAudioContext)();
-            if (audioContext.state === "suspended") {
-              audioContext.resume();
-              // Try playing again after resuming context
-              audio.play().catch((e) => {
-                console.error("Second attempt error:", e);
-                setTimeout(() => setPlayingAudio(null), 500);
-              });
-            } else {
-              setTimeout(() => setPlayingAudio(null), 500);
-            }
-          } catch (e) {
-            console.error("AudioContext error:", e);
-            setTimeout(() => setPlayingAudio(null), 500);
-          }
-        } else {
-          setTimeout(() => setPlayingAudio(null), 500);
-        }
+          // Try again after unlock event (helpful for mobile)
+          audioCache[wordId].once("unlock", function () {
+            audioCache[wordId].play();
+          });
+        },
       });
     }
 
-    audio.onended = () => {
-      setPlayingAudio(null);
-    };
+    // Play the sound
+    audioCache[wordId].play();
   };
 
   const playFeedbackSound = (isCorrect: boolean) => {
-    // If there's already feedback audio playing, stop it
-    if (feedbackAudioRef.current) {
-      feedbackAudioRef.current.pause();
-    }
+    const soundKey = isCorrect ? "correct" : "wrong";
 
-    // Determine which feedback sound to play
-    const audioPath = isCorrect
-      ? "/audio/feedback/correct.mp3"
-      : "/audio/feedback/wrong.mp3";
-
-    // Create and play the feedback audio
-    const audio = new Audio(audioPath);
-    feedbackAudioRef.current = audio;
-
-    // For mobile compatibility: set attributes before playing
-    audio.setAttribute("playsinline", "true");
-    audio.volume = 1.0;
-
-    // Play the audio and handle errors
-    const playPromise = audio.play();
-
-    if (playPromise !== undefined) {
-      playPromise.catch((error) => {
-        console.error("Error playing feedback sound:", error);
-        // Try to resume audio context if suspended (common on iOS)
-        if (typeof window !== "undefined" && window.AudioContext) {
-          try {
-            const audioContext = new (window.AudioContext ||
-              (window as any).webkitAudioContext)();
-            if (audioContext.state === "suspended") {
-              audioContext.resume();
-              // Try playing again after resuming context
-              audio.play().catch((e) => {
-                console.error("Second attempt feedback error:", e);
-              });
-            }
-          } catch (e) {
-            console.error("AudioContext error in feedback:", e);
-          }
-        }
-      });
+    // Stop any currently playing feedback sound
+    if (audioCache[soundKey]) {
+      audioCache[soundKey].play();
     }
   };
 
