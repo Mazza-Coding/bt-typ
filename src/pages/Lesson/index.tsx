@@ -238,53 +238,62 @@ const Lesson = () => {
     { id: "D", text: "Kocham morzy", isCorrect: false },
   ];
 
-  // Initialize feedback sounds once
+  // Initialize audio manager and unlock audio on mobile
   useEffect(() => {
-    if (!audioCache["correct"]) {
-      audioCache["correct"] = new Howl({
-        src: ["/audio/feedback/correct.mp3"],
-        volume: 1.0,
-        preload: true,
-        html5: true, // Enable HTML5 Audio to work better on mobile
-        onend: () => {
-          // Clear playing audio state when sound ends
-          setPlayingAudio(null);
-        },
-        // @ts-ignore - id parameter is required by howler but not used
-        onloaderror: (id, error) => {
-          console.error("Error loading audio:", error);
-        },
-        // @ts-ignore - id parameter is required by howler but not used
-        onplayerror: (id, error) => {
-          console.error("Error playing audio:", error);
-        },
-      });
-    }
+    // This function will attempt to unlock audio on mobile devices
+    const unlockAudio = () => {
+      // Create a silent audio context and play it
+      const audioContext = new (window.AudioContext ||
+        (window as any).webkitAudioContext)();
+      const buffer = audioContext.createBuffer(1, 1, 22050);
+      const source = audioContext.createBufferSource();
+      source.buffer = buffer;
+      source.connect(audioContext.destination);
+      if (source.start) {
+        source.start(0);
+      } else {
+        (source as any).noteOn(0);
+      }
 
-    if (!audioCache["wrong"]) {
-      audioCache["wrong"] = new Howl({
-        src: ["/audio/feedback/wrong.mp3"],
-        volume: 1.0,
-        preload: true,
-        html5: true, // Enable HTML5 Audio to work better on mobile
-        onend: () => {
-          // Clear playing audio state when sound ends
-          setPlayingAudio(null);
-        },
-        // @ts-ignore - id parameter is required by howler but not used
-        onloaderror: (id, error) => {
-          console.error("Error loading audio:", error);
-        },
-        // @ts-ignore - id parameter is required by howler but not used
-        onplayerror: (id, error) => {
-          console.error("Error playing audio:", error);
-        },
-      });
-    }
+      // Remove the event listeners once playback is allowed
+      document.removeEventListener("touchstart", unlockAudio, true);
+      document.removeEventListener("touchend", unlockAudio, true);
+      document.removeEventListener("click", unlockAudio, true);
 
-    // Clean up howler instances on unmount (optional but good practice)
+      // Pre-initialize common sounds to improve mobile response
+      if (!audioCache["correct"]) {
+        audioCache["correct"] = new Howl({
+          src: ["/audio/feedback/correct.mp3"],
+          volume: 1.0,
+          preload: true,
+          html5: true,
+        });
+      }
+
+      if (!audioCache["wrong"]) {
+        audioCache["wrong"] = new Howl({
+          src: ["/audio/feedback/wrong.mp3"],
+          volume: 1.0,
+          preload: true,
+          html5: true,
+        });
+      }
+    };
+
+    // Add event listeners to unlock audio on first user interaction
+    document.addEventListener("touchstart", unlockAudio, true);
+    document.addEventListener("touchend", unlockAudio, true);
+    document.addEventListener("click", unlockAudio, true);
+
+    // Set Howler global options to improve mobile compatibility
+    Howler.autoUnlock = true;
+    Howler.html5PoolSize = 10;
+
     return () => {
-      // No need to explicitly unload as Howler handles this
+      // Clean up event listeners
+      document.removeEventListener("touchstart", unlockAudio, true);
+      document.removeEventListener("touchend", unlockAudio, true);
+      document.removeEventListener("click", unlockAudio, true);
     };
   }, []);
 
@@ -303,7 +312,7 @@ const Lesson = () => {
         src: [audioPath],
         volume: 1.0,
         preload: true,
-        html5: true, // Enable HTML5 Audio to work better on mobile
+        html5: true, // Always use HTML5 Audio for better mobile compatibility
         onend: () => {
           // Clear playing audio state when sound ends
           setPlayingAudio(null);
@@ -326,8 +335,17 @@ const Lesson = () => {
       });
     }
 
-    // Play the sound
-    audioCache[wordId].play();
+    // On mobile, need to handle touch events specially
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+      // Force audio to use HTML5 Audio on mobile
+      (audioCache[wordId] as any).html5 = true;
+    }
+
+    // Play the sound with timeout to ensure UI update happens first
+    setTimeout(() => {
+      audioCache[wordId].play();
+    }, 50);
   };
 
   const playFeedbackSound = (isCorrect: boolean) => {
