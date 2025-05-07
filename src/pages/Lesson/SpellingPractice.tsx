@@ -131,6 +131,58 @@ const demonstrativeWords: WordItem[] = [
   },
 ];
 
+// Number words for Section 5
+const numberWords: WordItem[] = [
+  {
+    id: "jeden",
+    polish: "jeden",
+    english: "one (masc/neut.)",
+    audioPath: "/audio/lesson1/jeden.mp3",
+  },
+  {
+    id: "jedno",
+    polish: "jedno",
+    english: "one (neuter)",
+    audioPath: "/audio/lesson1/jedno.mp3",
+  },
+  {
+    id: "dwa",
+    polish: "dwa",
+    english: "two",
+    audioPath: "/audio/lesson1/dwa.mp3",
+  },
+  {
+    id: "trzy",
+    polish: "trzy",
+    english: "three",
+    audioPath: "/audio/lesson1/trzy.mp3",
+  },
+  {
+    id: "cztery",
+    polish: "cztery",
+    english: "four",
+    audioPath: "/audio/lesson1/cztery.mp3",
+  },
+  {
+    id: "dwoje",
+    polish: "dwoje",
+    english: "two (children)",
+    audioPath: "/audio/lesson1/dwoje.mp3",
+  },
+  {
+    id: "troje",
+    polish: "troje",
+    english: "three (children)",
+    audioPath: "/audio/lesson1/troje.mp3",
+  },
+  {
+    id: "czworo",
+    polish: "czworo",
+    english: "four (children)",
+    audioPath: "/audio/lesson1/czworo.mp3",
+  },
+];
+
 // Polish special characters for the keyboard
 const specialCharacters = ["ą", "ć", "ę", "ł", "ń", "ó", "ś", "ź", "ż"];
 
@@ -148,6 +200,8 @@ const SpellingPractice = (props: SpellingPracticeProps) => {
       ? "Spelling Practice: Adjectives"
       : practiceType === "section4"
       ? "Spelling Practice: Demonstratives"
+      : practiceType === "section5"
+      ? "Spelling Practice: Numbers"
       : "Spelling Practice");
 
   // Use the appropriate word set based on the practice type
@@ -159,6 +213,8 @@ const SpellingPractice = (props: SpellingPracticeProps) => {
       ? adjectiveWords
       : practiceType === "section4"
       ? demonstrativeWords
+      : practiceType === "section5"
+      ? numberWords
       : defaultWords);
 
   const backPath = props.backPath || "/lesson/1";
@@ -166,7 +222,6 @@ const SpellingPractice = (props: SpellingPracticeProps) => {
 
   // States for tracking practice progress
   const [level, setLevel] = useState(1); // 1: Full hint, 2: Partial hint, 3: No hint
-  const [round, setRound] = useState(1);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [practiceWords, setPracticeWords] = useState<WordItem[]>([]);
   const [input, setInput] = useState("");
@@ -355,7 +410,6 @@ const SpellingPractice = (props: SpellingPracticeProps) => {
   // Restart the exercise
   const restartExercise = () => {
     setLevel(1);
-    setRound(1);
     setCurrentIndex(0);
     setInput("");
     setIsCorrect(null);

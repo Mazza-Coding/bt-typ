@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import styles from "./Lesson.module.css";
 
 const Lesson = () => {
@@ -556,6 +556,15 @@ const Lesson = () => {
                     className={styles.navLink}
                   >
                     Section 4: This, That, and One (Demonstratives)
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#practice"
+                    onClick={() => setNavExpanded(false)}
+                    className={styles.navLink}
+                  >
+                    Section 5: Numbers
                   </a>
                 </li>
               </ul>
@@ -1439,6 +1448,32 @@ const Lesson = () => {
                 </Link>
                 <Link
                   to="/lesson/practice/spelling-practice?type=section4"
+                  className={styles.practiceButton}
+                >
+                  <span className={styles.practiceIcon}>✍️</span>
+                  <span className={styles.practiceButtonText}>
+                    Spelling Practice
+                  </span>
+                </Link>
+              </div>
+            </div>
+
+            <div className={styles.practiceSection}>
+              <h3 className={styles.practiceSectionTitle}>
+                🔢 SECTION 5: Numbers
+              </h3>
+              <div className={styles.practiceButtons}>
+                <Link
+                  to="/lesson/practice/memory-recall?type=section5"
+                  className={styles.practiceButton}
+                >
+                  <span className={styles.practiceIcon}>🧠</span>
+                  <span className={styles.practiceButtonText}>
+                    Memory Recall
+                  </span>
+                </Link>
+                <Link
+                  to="/lesson/practice/spelling-practice?type=section5"
                   className={styles.practiceButton}
                 >
                   <span className={styles.practiceIcon}>✍️</span>

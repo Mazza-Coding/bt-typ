@@ -131,6 +131,58 @@ const demonstrativeWords: WordItem[] = [
   },
 ];
 
+// Number words for Section 5
+const numberWords: WordItem[] = [
+  {
+    id: "jeden",
+    polish: "jeden",
+    english: "one (masc/neut.)",
+    audioPath: "/audio/lesson1/jeden.mp3",
+  },
+  {
+    id: "jedno",
+    polish: "jedno",
+    english: "one (neuter)",
+    audioPath: "/audio/lesson1/jedno.mp3",
+  },
+  {
+    id: "dwa",
+    polish: "dwa",
+    english: "two",
+    audioPath: "/audio/lesson1/dwa.mp3",
+  },
+  {
+    id: "trzy",
+    polish: "trzy",
+    english: "three",
+    audioPath: "/audio/lesson1/trzy.mp3",
+  },
+  {
+    id: "cztery",
+    polish: "cztery",
+    english: "four",
+    audioPath: "/audio/lesson1/cztery.mp3",
+  },
+  {
+    id: "dwoje",
+    polish: "dwoje",
+    english: "two (children)",
+    audioPath: "/audio/lesson1/dwoje.mp3",
+  },
+  {
+    id: "troje",
+    polish: "troje",
+    english: "three (children)",
+    audioPath: "/audio/lesson1/troje.mp3",
+  },
+  {
+    id: "czworo",
+    polish: "czworo",
+    english: "four (children)",
+    audioPath: "/audio/lesson1/czworo.mp3",
+  },
+];
+
 const MemoryRecall = (props: MemoryRecallProps) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -145,6 +197,8 @@ const MemoryRecall = (props: MemoryRecallProps) => {
       ? "Memory Recall Practice: Adjectives"
       : practiceType === "section4"
       ? "Memory Recall Practice: Demonstratives"
+      : practiceType === "section5"
+      ? "Memory Recall Practice: Numbers"
       : "Memory Recall Practice");
 
   // Use the appropriate word set based on the practice type
@@ -156,6 +210,8 @@ const MemoryRecall = (props: MemoryRecallProps) => {
       ? adjectiveWords
       : practiceType === "section4"
       ? demonstrativeWords
+      : practiceType === "section5"
+      ? numberWords
       : defaultWords);
 
   const backPath = props.backPath || "/lesson/1";
@@ -230,7 +286,7 @@ const MemoryRecall = (props: MemoryRecallProps) => {
   };
 
   // Generate multiple choice options
-  const generateOptions = (currentWord: WordItem) => {
+  const generateOptions = (_currentWord: WordItem) => {
     // Include all words as options
     const allOptions = [...words];
 
