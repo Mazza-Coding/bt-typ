@@ -376,12 +376,41 @@ const SpellingPractice = (props: SpellingPracticeProps) => {
     const audio = new Audio(audioPath);
     audioRef.current = audio;
 
+    // For mobile compatibility: set attributes before playing
+    audio.setAttribute("playsinline", "true");
+    audio.volume = 1.0;
+
     // Play the audio and update state when finished
-    audio.play().catch((error) => {
-      console.error("Error playing audio:", error);
-      // Show a brief visual feedback even if audio fails
-      setTimeout(() => setPlayingAudio(null), 500);
-    });
+    const playPromise = audio.play();
+
+    if (playPromise !== undefined) {
+      playPromise.catch((error) => {
+        console.error("Error playing audio:", error);
+        // Try to resume audio context if suspended (common on iOS)
+        if (typeof window !== "undefined" && window.AudioContext) {
+          try {
+            const audioContext = new (window.AudioContext ||
+              (window as any).webkitAudioContext)();
+            if (audioContext.state === "suspended") {
+              audioContext.resume();
+              // Try playing again after resuming context
+              audio.play().catch((e) => {
+                console.error("Second attempt error:", e);
+                setTimeout(() => setPlayingAudio(null), 500);
+              });
+            } else {
+              setTimeout(() => setPlayingAudio(null), 500);
+            }
+          } catch (e) {
+            console.error("AudioContext error:", e);
+            setTimeout(() => setPlayingAudio(null), 500);
+          }
+        } else {
+          setTimeout(() => setPlayingAudio(null), 500);
+        }
+      });
+    }
+
     audio.onended = () => {
       setPlayingAudio(null);
     };
@@ -402,9 +431,35 @@ const SpellingPractice = (props: SpellingPracticeProps) => {
     // Create and play the feedback audio
     const audio = new Audio(audioPath);
     feedbackAudioRef.current = audio;
-    audio.play().catch((error) => {
-      console.error("Error playing feedback sound:", error);
-    });
+
+    // For mobile compatibility: set attributes before playing
+    audio.setAttribute("playsinline", "true");
+    audio.volume = 1.0;
+
+    // Play the audio and handle errors
+    const playPromise = audio.play();
+
+    if (playPromise !== undefined) {
+      playPromise.catch((error) => {
+        console.error("Error playing feedback sound:", error);
+        // Try to resume audio context if suspended (common on iOS)
+        if (typeof window !== "undefined" && window.AudioContext) {
+          try {
+            const audioContext = new (window.AudioContext ||
+              (window as any).webkitAudioContext)();
+            if (audioContext.state === "suspended") {
+              audioContext.resume();
+              // Try playing again after resuming context
+              audio.play().catch((e) => {
+                console.error("Second attempt feedback error:", e);
+              });
+            }
+          } catch (e) {
+            console.error("AudioContext error in feedback:", e);
+          }
+        }
+      });
+    }
   };
 
   // Restart the exercise
