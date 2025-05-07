@@ -1,0 +1,980 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.header {
+  margin-bottom: 3rem;
+}
+
+.backButton {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #555;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.backButton:hover {
+  color: #000;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+.content {
+  background-color: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Navigation menu styles */
+.navContainer {
+  position: sticky;
+  top: 1rem;
+  z-index: 100;
+  margin-bottom: 1.5rem;
+}
+
+.navToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.2rem;
+  background-color: #5b7cff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(91, 124, 255, 0.3);
+  margin-bottom: 0.5rem;
+}
+
+.navToggle:hover {
+  background-color: #4a69e2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(91, 124, 255, 0.4);
+}
+
+.navToggle:active {
+  transform: translateY(0);
+}
+
+.navIcon {
+  font-size: 1.2rem;
+}
+
+.navMenu {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  margin-bottom: 1.5rem;
+  max-height: 70vh;
+  overflow-y: auto;
+  border: 1px solid #e0e4ff;
+}
+
+.navSection {
+  margin-bottom: 1.5rem;
+}
+
+.navSection:last-child {
+  margin-bottom: 0;
+}
+
+.navSectionTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e0e4ff;
+  color: #4a69e2;
+}
+
+.navList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navLink {
+  display: block;
+  padding: 0.6rem 0.8rem;
+  color: #333;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  margin-bottom: 0.3rem;
+  font-size: 0.95rem;
+}
+
+.navLink:hover {
+  background-color: #f0f2ff;
+  color: #4a69e2;
+}
+
+.placeholder {
+  font-size: 1.2rem;
+  color: #888;
+  text-align: center;
+  padding: 5rem 0;
+}
+
+/* New lesson content styles */
+.lessonSection {
+  line-height: 1.7;
+}
+
+.intro {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.stepTitle,
+.examplesTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem;
+  color: #333;
+}
+
+.examplesList {
+  margin: 1.5rem 0 1.5rem 2rem;
+  list-style-position: outside;
+}
+
+.examplesList li {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+}
+
+.wordItem {
+  display: flex;
+  align-items: center;
+  margin-right: 6px;
+  gap: 8px;
+}
+
+.polishWord {
+  font-weight: 500;
+  color: #333;
+}
+
+.audioButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  transition: all 0.2s ease;
+  background-color: #f5f5f5;
+  flex-shrink: 0;
+  margin-left: 4px;
+}
+
+.audioButton:hover {
+  background-color: #e5e5ff;
+  transform: scale(1.05);
+}
+
+.audioButton:active {
+  transform: scale(0.95);
+}
+
+.playIcon,
+.playingIcon {
+  font-size: 16px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.playingIcon {
+  color: #4a5de3;
+}
+
+.englishWord {
+  color: #555;
+}
+
+.memoryTip {
+  background-color: #f0f8ff;
+  padding: 1.2rem;
+  border-radius: 8px;
+  border-left: 4px solid #a3b1ff;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
+
+.audioNote {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 2rem 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.audioNote code {
+  background-color: #e8e8e8;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+/* Quiz section styles */
+.quizSection {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2.5rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.quizTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.quizQuestion {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.quizOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.quizOption {
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  background-color: white;
+  font-size: 1.05rem;
+  transition: all 0.2s ease;
+  border: 1px solid #eee;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.quizOption:hover:not(:disabled) {
+  background-color: #f0f0ff;
+  border-color: #d0d4ff;
+}
+
+.quizOption:disabled {
+  cursor: default;
+}
+
+.correctOption {
+  background-color: #efffef;
+  border-color: #9bd49b;
+  color: #2c682c;
+}
+
+.incorrectOption {
+  background-color: #fff0f0;
+  border-color: #f5c2c2;
+  color: #982c2c;
+}
+
+.unselected {
+  opacity: 0.7;
+}
+
+.feedbackIcon {
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+.successFeedback {
+  color: #2c682c;
+}
+
+.errorFeedback {
+  color: #982c2c;
+}
+
+.resetButton {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #f0f2ff;
+  border: 1px solid #d0d4ff;
+  border-radius: 4px;
+  color: #4a5de3;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.resetButton:hover {
+  background-color: #e0e4ff;
+}
+
+.optionLetter {
+  font-weight: 600;
+  color: #4a5de3;
+  margin-right: 0.5rem;
+  display: inline-block;
+  width: 1.5rem;
+}
+
+.answerContainer {
+  margin-top: 1.5rem;
+}
+
+.answerToggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #4a5de3;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  font-weight: 500;
+}
+
+.answerIcon {
+  margin-right: 0.5rem;
+}
+
+.answerContent {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #e8f4ff;
+  border-radius: 8px;
+  border-left: 4px solid #4a5de3;
+  font-size: 1.05rem;
+}
+
+/* Table styles for Step 2 */
+.tableContainer {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+}
+
+.examplesTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.examplesTable th {
+  background-color: #f0f2ff;
+  padding: 0.8rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #4a5de3;
+  border-bottom: 1px solid #e0e4ff;
+}
+
+.examplesTable td {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+.examplesTable tr:last-child td {
+  border-bottom: none;
+}
+
+.examplesTable tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.examplesTable .audioButton {
+  margin-left: 4px;
+}
+
+.polishSentence {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  gap: 8px;
+}
+
+.englishSentence {
+  display: block;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.noteText {
+  font-size: 1.1rem;
+  font-style: italic;
+  margin: 1.5rem 0;
+  color: #444;
+}
+
+.optionContent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.inlineAudioButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  transition: all 0.2s ease;
+  background-color: #f5f5f5;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.inlineAudioButton:hover:not(:disabled) {
+  background-color: #e5e5ff;
+  transform: scale(1.05);
+}
+
+.inlineAudioButton:active {
+  transform: scale(0.95);
+}
+
+.inlineAudioButton:disabled {
+  cursor: default;
+}
+
+.quizSubQuestion {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 1.2rem;
+  padding: 0.5rem;
+  background-color: #f5f5f5;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.subheading {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem;
+  color: #333;
+}
+
+.simpleWordList {
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.simpleWordItem {
+  margin-bottom: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.recapSection {
+  background-color: #f0f7ff;
+  border-radius: 12px;
+  padding: 1.8rem;
+  margin: 3rem 0 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-left: 6px solid #5b7cff;
+}
+
+.recapSection .stepTitle {
+  color: #1a3b8c;
+  margin-top: 0;
+}
+
+.recapList {
+  list-style-type: none;
+  padding: 0;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.recapList li {
+  position: relative;
+  padding-left: 1.8rem;
+  margin-bottom: 1.2rem;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.recapList li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: #5b7cff;
+  font-weight: bold;
+}
+
+/* Practice footer styles */
+.practiceFooter {
+  margin-top: 4rem;
+  padding: 2rem;
+  background-color: #f8f9ff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.practiceTitle {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.practiceSection {
+  margin-bottom: 2.5rem;
+}
+
+.practiceSection:last-child {
+  margin-bottom: 0;
+}
+
+.practiceSectionTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding-bottom: 0.8rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #e5e8ff;
+  color: #1a3b8c;
+}
+
+.practiceButtons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.practiceButton {
+  flex: 1;
+  min-width: 180px;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 1.5rem;
+  background-color: white;
+  border: 1px solid #e0e4ff;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.practiceButton:hover {
+  background-color: #f0f2ff;
+  border-color: #b8c0ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.practiceButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.practiceIcon {
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.practiceButtonText {
+  flex: 1;
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .header h1 {
+    font-size: 1.8rem;
+  }
+
+  .content {
+    padding: 1.5rem;
+  }
+
+  .intro {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .stepTitle,
+  .examplesTitle {
+    font-size: 1.3rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  .examplesList {
+    margin: 1rem 0 1rem 1.5rem;
+  }
+
+  .examplesList li {
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+  }
+
+  .memoryTip {
+    padding: 1rem;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .quizSection {
+    padding: 1.2rem;
+    margin: 2rem 0;
+  }
+
+  .quizTitle {
+    font-size: 1.2rem;
+  }
+
+  .quizQuestion {
+    font-size: 1rem;
+  }
+
+  .quizOption {
+    padding: 0.7rem;
+    font-size: 0.95rem;
+  }
+
+  .answerContent {
+    padding: 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  .examplesTable {
+    font-size: 0.9rem;
+  }
+
+  .examplesTable th,
+  .examplesTable td {
+    padding: 0.7rem;
+  }
+
+  .noteText {
+    font-size: 1rem;
+  }
+
+  .wordItem,
+  .polishSentence {
+    gap: 6px;
+  }
+
+  .audioButton {
+    width: 28px;
+    height: 28px;
+  }
+
+  .playIcon,
+  .playingIcon {
+    font-size: 14px;
+  }
+
+  .inlineAudioButton {
+    width: 22px;
+    height: 22px;
+    margin-left: 6px;
+  }
+
+  .optionContent {
+    gap: 6px;
+  }
+
+  .quizSubQuestion {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    padding: 0.4rem;
+  }
+
+  .subheading {
+    font-size: 1.2rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  .simpleWordItem {
+    margin-bottom: 1rem;
+  }
+
+  .recapSection {
+    padding: 1.5rem;
+    margin: 2.5rem 0 1rem;
+  }
+
+  .recapList {
+    margin: 1.2rem 0 0.3rem;
+  }
+
+  .recapList li {
+    font-size: 1rem;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .practiceFooter {
+    margin-top: 3rem;
+    padding: 1.5rem;
+  }
+
+  .practiceTitle {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .practiceSection {
+    margin-bottom: 2rem;
+  }
+
+  .practiceSectionTitle {
+    font-size: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .practiceButton {
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+    min-width: 150px;
+  }
+
+  .practiceIcon {
+    font-size: 1.4rem;
+  }
+
+  .navContainer {
+    top: 0.8rem;
+  }
+
+  .navToggle {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .navIcon {
+    font-size: 1.1rem;
+  }
+
+  .navMenu {
+    padding: 1.2rem;
+    max-height: 80vh;
+  }
+
+  .navSectionTitle {
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .navLink {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .examplesList li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .englishWord {
+    margin-top: 0.3rem;
+    margin-left: 2rem;
+  }
+
+  .quizOptions {
+    gap: 0.6rem;
+  }
+
+  .examplesTable th,
+  .examplesTable td {
+    padding: 0.6rem;
+  }
+
+  .polishSentence {
+    margin-bottom: 0.2rem;
+    gap: 4px;
+  }
+
+  .englishSentence {
+    font-size: 0.8rem;
+  }
+
+  .audioButton {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+  }
+
+  .playIcon,
+  .playingIcon {
+    font-size: 12px;
+  }
+
+  .wordItem,
+  .polishSentence {
+    gap: 4px;
+  }
+
+  .inlineAudioButton {
+    width: 20px;
+    height: 20px;
+    margin-left: 4px;
+  }
+
+  .optionContent {
+    gap: 4px;
+  }
+
+  .quizSubQuestion {
+    font-size: 1rem;
+    padding: 0.3rem;
+  }
+
+  .subheading {
+    font-size: 1.1rem;
+  }
+
+  .simpleWordItem {
+    font-size: 0.95rem;
+  }
+
+  .recapSection {
+    padding: 1.2rem;
+    margin: 2rem 0 1rem;
+  }
+
+  .recapList li {
+    font-size: 0.95rem;
+    padding-left: 1.2rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .practiceFooter {
+    margin-top: 2.5rem;
+    padding: 1.2rem;
+  }
+
+  .practiceTitle {
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .practiceButtons {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .practiceSection {
+    margin-bottom: 1.8rem;
+  }
+
+  .practiceSectionTitle {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+  }
+
+  .practiceButton {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .practiceIcon {
+    font-size: 1.3rem;
+  }
+
+  .navContainer {
+    top: 0.5rem;
+  }
+
+  .navToggle {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .navMenu {
+    padding: 1rem;
+  }
+
+  .navSectionTitle {
+    font-size: 0.95rem;
+  }
+
+  .navLink {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .audioButton {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+  }
+
+  .playIcon,
+  .playingIcon {
+    font-size: 11px;
+  }
+}

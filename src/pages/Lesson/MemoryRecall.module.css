@@ -1,0 +1,524 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.header {
+  margin-bottom: 2.5rem;
+}
+
+.backButton {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #555;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.backButton:hover {
+  color: #000;
+}
+
+.header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 1rem;
+}
+
+.instruction {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.progress {
+  height: 8px;
+  background-color: #eee;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background-color: #5b7cff;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* Learn Section Styles */
+.learnSection,
+.recallSection {
+  background-color: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem;
+  color: #333;
+}
+
+.wordCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.wordCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  border-radius: 10px;
+  background-color: #f8f9ff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.wordCard:hover {
+  transform: translateY(-4px);
+}
+
+.polishWord {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: #333;
+}
+
+.englishWord {
+  font-size: 1.2rem;
+  color: #666;
+  margin-top: 0.8rem;
+}
+
+.audioButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background-color: #e5e5ff;
+  transition: all 0.2s ease;
+}
+
+.audioButton:hover {
+  background-color: #d0d4ff;
+  transform: scale(1.05);
+}
+
+.audioButton:active {
+  transform: scale(0.95);
+}
+
+.playIcon,
+.playingIcon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.playingIcon {
+  color: #4a5de3;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.primaryButton,
+.secondaryButton {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.primaryButton {
+  background-color: #5b7cff;
+  color: white;
+  border: none;
+  box-shadow: 0 2px 8px rgba(91, 124, 255, 0.3);
+}
+
+.primaryButton:hover {
+  background-color: #4a69e2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(91, 124, 255, 0.4);
+}
+
+.secondaryButton {
+  background-color: white;
+  color: #5b7cff;
+  border: 1px solid #d0d4ff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secondaryButton:hover {
+  background-color: #f0f2ff;
+  border-color: #b8c0ff;
+}
+
+/* Recall Section Styles */
+.recallCard {
+  background-color: #f8f9ff;
+  border-radius: 10px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+
+.recallPolishWord {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.recallQuestion {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.recallOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 100%;
+  max-width: 450px;
+  margin-bottom: 1.5rem;
+}
+
+.recallOption {
+  padding: 1rem 1.2rem;
+  background-color: white;
+  border: 1px solid #e0e4ff;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-align: center;
+}
+
+.recallOption:hover:not(:disabled) {
+  background-color: #f0f2ff;
+  border-color: #b8c0ff;
+  transform: translateY(-2px);
+}
+
+.recallOption:disabled {
+  cursor: default;
+}
+
+.correctOption {
+  background-color: #efffef;
+  border-color: #9bd49b;
+  color: #2c682c;
+}
+
+.incorrectOption {
+  background-color: #fff0f0;
+  border-color: #f5c2c2;
+  color: #982c2c;
+}
+
+.unselected {
+  opacity: 0.7;
+}
+
+.feedbackContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.successFeedback,
+.errorFeedback {
+  font-size: 1.1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.successFeedback {
+  background-color: #efffef;
+  color: #2c682c;
+}
+
+.errorFeedback {
+  background-color: #fff0f0;
+  color: #982c2c;
+}
+
+.feedbackIcon {
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+.showAnswerButton {
+  padding: 0.8rem 1.5rem;
+  background-color: #5b7cff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(91, 124, 255, 0.3);
+}
+
+.showAnswerButton:hover {
+  background-color: #4a69e2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(91, 124, 255, 0.4);
+}
+
+.answerRevealed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.recallEnglishWord {
+  font-size: 1.8rem;
+  color: #4a69e2;
+  font-weight: 600;
+}
+
+.continueButton {
+  padding: 0.8rem 1.5rem;
+  background-color: #5b7cff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(91, 124, 255, 0.3);
+}
+
+.continueButton:hover {
+  background-color: #4a69e2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(91, 124, 255, 0.4);
+}
+
+.recallProgress {
+  display: flex;
+  justify-content: center;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Complete Screen Styles */
+.completeScreen {
+  background-color: white;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.completeScreen h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.completeScreen p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .header h1 {
+    font-size: 1.7rem;
+  }
+
+  .instruction {
+    font-size: 1rem;
+  }
+
+  .wordCards {
+    grid-template-columns: 1fr;
+  }
+
+  .learnSection,
+  .recallSection {
+    padding: 1.5rem;
+  }
+
+  .recallCard {
+    padding: 1.5rem;
+  }
+
+  .polishWord,
+  .recallPolishWord {
+    font-size: 1.8rem;
+  }
+
+  .audioButton {
+    width: 32px;
+    height: 32px;
+  }
+
+  .playIcon,
+  .playingIcon {
+    font-size: 16px;
+  }
+
+  .recallEnglishWord {
+    font-size: 1.5rem;
+  }
+
+  .recallOptions {
+    max-width: 100%;
+  }
+
+  .recallQuestion {
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .recallOption {
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+  }
+
+  .successFeedback,
+  .errorFeedback {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .instruction {
+    font-size: 0.95rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .wordCard {
+    padding: 1.2rem;
+  }
+
+  .polishWord {
+    font-size: 1.6rem;
+  }
+
+  .englishWord {
+    font-size: 1.1rem;
+  }
+
+  .recallPolishWord {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .recallEnglishWord {
+    font-size: 1.3rem;
+  }
+
+  .audioButton {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+  }
+
+  .playIcon,
+  .playingIcon {
+    font-size: 14px;
+  }
+
+  .primaryButton,
+  .secondaryButton,
+  .showAnswerButton,
+  .continueButton {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  .completeScreen {
+    padding: 2rem 1.5rem;
+  }
+
+  .completeScreen h2 {
+    font-size: 1.6rem;
+  }
+
+  .completeScreen p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .recallQuestion {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .audioButton {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+  }
+
+  .playIcon,
+  .playingIcon {
+    font-size: 12px;
+  }
+}

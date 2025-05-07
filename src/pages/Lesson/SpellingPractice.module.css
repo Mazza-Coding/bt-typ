@@ -1,0 +1,525 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.header {
+  margin-bottom: 2.5rem;
+}
+
+.backButton {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #555;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.backButton:hover {
+  color: #000;
+}
+
+.header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 1rem;
+}
+
+.instruction {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.progress {
+  height: 8px;
+  background-color: #eee;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.progressBar {
+  height: 100%;
+  background-color: #5b7cff;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.levelIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.dot,
+.activeDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot {
+  background-color: #ddd;
+}
+
+.activeDot {
+  background-color: #5b7cff;
+}
+
+.levelText {
+  font-size: 0.9rem;
+  color: #555;
+  margin-left: 0.5rem;
+}
+
+/* Practice section styles */
+.practiceSection {
+  background-color: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+}
+
+.wordCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.englishPrompt {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem;
+  background-color: #f8f9ff;
+  border-radius: 10px;
+}
+
+.englishLabel {
+  font-weight: 600;
+  color: #555;
+  margin-right: 0.5rem;
+}
+
+.englishWord {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.audioButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background-color: #e5e5ff;
+  transition: all 0.2s ease;
+  margin-left: auto;
+}
+
+.audioButton:hover {
+  background-color: #d0d4ff;
+  transform: scale(1.05);
+}
+
+.audioButton:active {
+  transform: scale(0.95);
+}
+
+.playIcon,
+.playingIcon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.playingIcon {
+  color: #4a5de3;
+}
+
+.hintBox {
+  width: 100%;
+  padding: 1.2rem;
+  border-radius: 10px;
+  background-color: #f0f7ff;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.fullHint,
+.partialHint {
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.fullHint {
+  color: #5b7cff;
+}
+
+.partialHint {
+  color: #666;
+}
+
+.inputForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.polishLabel {
+  font-weight: 600;
+  color: #555;
+  margin-right: 0.5rem;
+}
+
+.spellingInput {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  border: 2px solid #e0e4ff;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.spellingInput:focus {
+  outline: none;
+  border-color: #5b7cff;
+  box-shadow: 0 0 0 3px rgba(91, 124, 255, 0.2);
+}
+
+.spellingInput:disabled {
+  background-color: #f8f9ff;
+  cursor: not-allowed;
+}
+
+.checkButton {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #5b7cff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.checkButton:hover:not(:disabled) {
+  background-color: #4a69e2;
+  transform: translateY(-2px);
+}
+
+.checkButton:disabled {
+  background-color: #b8c0ff;
+  cursor: not-allowed;
+}
+
+.specialCharacters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.charButton {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 1px solid #e0e4ff;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.charButton:hover:not(:disabled) {
+  background-color: #f0f2ff;
+  border-color: #b8c0ff;
+  transform: translateY(-2px);
+}
+
+.charButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.successFeedback,
+.errorFeedback {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.successFeedback {
+  background-color: #efffef;
+  color: #2c682c;
+}
+
+.errorFeedback {
+  background-color: #fff0f0;
+  color: #982c2c;
+}
+
+.feedbackIcon {
+  margin-right: 0.8rem;
+  font-weight: bold;
+}
+
+.progressCounter {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Complete screen styles */
+.completeScreen {
+  background-color: white;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.completeScreen h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.completeScreen p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.primaryButton,
+.secondaryButton {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.primaryButton {
+  background-color: #5b7cff;
+  color: white;
+  border: none;
+  box-shadow: 0 2px 8px rgba(91, 124, 255, 0.3);
+}
+
+.primaryButton:hover {
+  background-color: #4a69e2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(91, 124, 255, 0.4);
+}
+
+.secondaryButton {
+  background-color: white;
+  color: #5b7cff;
+  border: 1px solid #d0d4ff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secondaryButton:hover {
+  background-color: #f0f2ff;
+  border-color: #b8c0ff;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem 0;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .header h1 {
+    font-size: 1.7rem;
+  }
+
+  .instruction {
+    font-size: 1rem;
+  }
+
+  .practiceSection {
+    padding: 1.5rem;
+  }
+
+  .englishPrompt {
+    padding: 0.8rem;
+  }
+
+  .englishWord {
+    font-size: 1.4rem;
+  }
+
+  .audioButton {
+    width: 32px;
+    height: 32px;
+  }
+
+  .playIcon,
+  .playingIcon {
+    font-size: 16px;
+  }
+
+  .hintBox {
+    padding: 1rem;
+  }
+
+  .fullHint,
+  .partialHint {
+    font-size: 1.4rem;
+  }
+
+  .spellingInput {
+    padding: 0.7rem;
+    font-size: 1.2rem;
+  }
+
+  .charButton {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+
+  .successFeedback,
+  .errorFeedback {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .instruction {
+    font-size: 0.95rem;
+  }
+
+  .levelIndicator {
+    flex-wrap: wrap;
+  }
+
+  .englishPrompt {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .englishWord {
+    font-size: 1.3rem;
+  }
+
+  .audioButton {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+  }
+
+  .playIcon,
+  .playingIcon {
+    font-size: 14px;
+  }
+
+  .hintBox {
+    padding: 0.8rem;
+  }
+
+  .fullHint,
+  .partialHint {
+    font-size: 1.3rem;
+  }
+
+  .inputWrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .spellingInput {
+    width: 100%;
+    font-size: 1.1rem;
+  }
+
+  .specialCharacters {
+    gap: 0.3rem;
+  }
+
+  .charButton {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+
+  .completeScreen {
+    padding: 2rem 1.5rem;
+  }
+
+  .completeScreen h2 {
+    font-size: 1.6rem;
+  }
+
+  .actionButtons {
+    flex-direction: column;
+  }
+}
