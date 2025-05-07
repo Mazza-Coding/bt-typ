@@ -311,10 +311,17 @@ const Lesson = () => {
         // @ts-ignore - id parameter is required by howler but not used
         onloaderror: (id, error) => {
           console.error("Error loading audio:", error);
+          setPlayingAudio(null);
         },
         // @ts-ignore - id parameter is required by howler but not used
         onplayerror: (id, error) => {
           console.error("Error playing audio:", error);
+          setPlayingAudio(null);
+
+          // Try again after unlock event (helpful for mobile)
+          audioCache[wordId].once("unlock", function () {
+            audioCache[wordId].play();
+          });
         },
       });
     }
@@ -326,10 +333,30 @@ const Lesson = () => {
   const playFeedbackSound = (isCorrect: boolean) => {
     const soundKey = isCorrect ? "correct" : "wrong";
 
-    // Stop any currently playing feedback sound
-    if (audioCache[soundKey]) {
-      audioCache[soundKey].play();
+    // Create feedback sounds if they don't exist
+    if (!audioCache[soundKey]) {
+      audioCache[soundKey] = new Howl({
+        src: [
+          isCorrect
+            ? "/audio/feedback/correct.mp3"
+            : "/audio/feedback/wrong.mp3",
+        ],
+        volume: 1.0,
+        preload: true,
+        html5: true, // Enable HTML5 Audio to work better on mobile
+        onplayerror: () => {
+          console.error("Error playing feedback sound");
+
+          // Try again after unlock event (helpful for mobile)
+          audioCache[soundKey].once("unlock", function () {
+            audioCache[soundKey].play();
+          });
+        },
+      });
     }
+
+    // Play the feedback sound
+    audioCache[soundKey].play();
   };
 
   const toggleAnswer = () => {
